@@ -13,7 +13,9 @@ from sensor_stick.features import compute_normal_histograms
 from sensor_stick.srv import GetNormals
 from geometry_msgs.msg import Pose
 from sensor_msgs.msg import PointCloud2
+import os
 
+os.chdir('/home/robond/catkin_ws/src/sensor_stick/scripts/')
 
 def get_normals(cloud):
     get_normals_prox = rospy.ServiceProxy('/feature_extractor/get_normals', GetNormals)
@@ -39,7 +41,8 @@ if __name__ == '__main__':
     for model_name in models:
         spawn_model(model_name)
 
-        for i in range(5):
+        for i in range(50):
+            print model_name, i
             # make five attempts to get a valid a point cloud then give up
             sample_was_good = False
             try_count = 0
@@ -65,4 +68,5 @@ if __name__ == '__main__':
 
 
     pickle.dump(labeled_features, open('training_set.sav', 'wb'))
+    print 'data saved.'
 

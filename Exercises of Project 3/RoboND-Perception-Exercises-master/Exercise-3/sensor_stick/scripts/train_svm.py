@@ -7,7 +7,9 @@ from sklearn import svm
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn import cross_validation
 from sklearn import metrics
+import os
 
+os.chdir('/home/robond/catkin_ws/src/sensor_stick/scripts/')
 def plot_confusion_matrix(cm, classes,
                           normalize=False,
                           title='Confusion matrix',
@@ -102,7 +104,7 @@ clf.fit(X=X_train, y=y_train)
 model = {'classifier': clf, 'classes': encoder.classes_, 'scaler': X_scaler}
 
 # Save classifier to disk
-pickle.dump(model, open('model.sav', 'wb'))
+pickle.dump(model, open('./model.sav', 'wb'))
 
 # Plot non-normalized confusion matrix
 plt.figure()
